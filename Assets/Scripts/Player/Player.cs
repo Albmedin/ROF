@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform gunTip;
     [SerializeField] GameObject bullet;
     [Header("Ground Movement")]
+    [SerializeField] float speedMultiplier = 1f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float groundSpeed = 3f;
     [SerializeField] float dashTime = 0.25f;
