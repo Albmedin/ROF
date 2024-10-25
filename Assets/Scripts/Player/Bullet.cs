@@ -2,22 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public abstract class Bullet : MonoBehaviour
 {
     [SerializeField] float existTime = 3f;
     [SerializeField] float speed = 5f;
+    [SerializeField] uint damage = 1;
+    public uint Damage {get{return damage;}}
     
-    // Rigidbody rb;
+    Rigidbody rb;
     
-    // private void Awake() {
-    //     rb = GetComponent<Rigidbody>();
-    // }
-    
-    // Start is called before the first frame update
-    // void Start()
-    // {
-        
-    // }
+    private void Awake() {
+        rb = GetComponent<Rigidbody>();
+    }
 
     // Update is called once per frame
     void Update()
@@ -27,13 +23,11 @@ public class Bullet : MonoBehaviour
         }
         
         existTime -= Time.deltaTime;
+        
+        transform.forward = rb.velocity;
     }
     
-    public void Fire(){
-        GetComponent<Rigidbody>().velocity = transform.forward*speed;
-    }
-    
-    private void OnCollisionEnter(Collision other) {
-        Destroy(gameObject);
+    public virtual void Fire(){
+        rb.velocity = transform.forward*speed;
     }
 }

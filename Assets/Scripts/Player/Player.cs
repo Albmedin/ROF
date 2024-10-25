@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] float knockbackTime = 0.25f;
     [SerializeField] float knockbackForce = 3f;
     [Header("Weapon")]
+    [SerializeField] float shotDelay = 0.5f;
     [SerializeField] Transform aimObject;
     [SerializeField] Transform gunTip;
     [SerializeField] GameObject bullet;
@@ -24,9 +25,6 @@ public class Player : MonoBehaviour
     [SerializeField] float dashMultiplier = 2f;
     [SerializeField] float dashCooldownTime = 0.5f;
     [SerializeField] float jumpHeight = 5f;
-    [SerializeField] Transform playerBottom;
-    [SerializeField] float groundDistance = 0.1f;
-    [SerializeField] LayerMask groundMask;
     [Header("Flight")]
     [SerializeField] float airSpeed = 1.5f;
     [SerializeField] float liftSpeed = 3f;
@@ -45,6 +43,7 @@ public class Player : MonoBehaviour
     
     // Internal Variables
     bool isGrounded = true;
+    bool inFlight = false;
     float horizontalVelocity = 0;
     float dashTimer = 0;
     float dashCooldownTimer = 0;
@@ -52,8 +51,10 @@ public class Player : MonoBehaviour
     float flightInputDelayTime = 0;
     bool damaged = false;
     float knockbackTimeLeft = 0;
+    float shotDelayTimer = 0;
     
     // Internal Components
+    SpriteRenderer playerSprite;
     CharacterController chaCon;
     PlayerInput playerInput;
     InputAction moveAction, mouseAction, shootAction, jumpAction, dashAction, interactAction;
@@ -61,6 +62,8 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerSprite = GetComponentInChildren<SpriteRenderer>();
+        
         chaCon = GetComponent<CharacterController>();
         
         playerInput = GetComponent<PlayerInput>();
@@ -80,7 +83,7 @@ public class Player : MonoBehaviour
     }
     
     void Movement(){
-        isGrounded = Physics.CheckSphere(playerBottom.position, groundDistance, groundMask);
+        isGrounded = chaCon.isGrounded;
         
         // Damage knockback
         if(knockbackTimeLeft>0){
@@ -88,10 +91,10 @@ public class Player : MonoBehaviour
         }
         else {
             // Horizontal Movement
-            float adjustedSpeed = isGrounded ? groundSpeed : airSpeed;
+            float adjustedSpeed = !inFlight ? groundSpeed : airSpeed;
             
             // Dash
-            if (dashAction.triggered && dashCooldownTimer<=0){
+            if (horizontalVelocity != 0 && dashAction.triggered && dashCooldownTimer<=0){
                 dashTimer = dashTime;
                 dashCooldownTimer = dashCooldownTime;
                 horizontalVelocity *= dashMultiplier;
@@ -101,26 +104,36 @@ public class Player : MonoBehaviour
             }
             else {
                 horizontalVelocity = moveAction.ReadValue<float>()*adjustedSpeed;
+                dashCooldownTimer -= Time.deltaTime;
             }
-            dashCooldownTimer -= Time.deltaTime;
+            
+            // Flip sprite
+            if (horizontalVelocity < 0) {
+                playerSprite.flipX = true;
+            }
+            else if (horizontalVelocity > 0) {
+                playerSprite.flipX = false;
+            }
             
             // Jump
             if (jumpAction.triggered && isGrounded){
                 verticalVelocity = Mathf.Sqrt(Mathf.Abs(jumpHeight*2f*gravity));
             }
             // Flight
-            else if (jumpAction.inProgress && flightStamina > 0){
+            else if (jumpAction.inProgress && flightStamina > 0 && !isGrounded){
                 flightInputDelayTime += Time.deltaTime;
                 if (flightInputDelayTime >= flightInputDelay){
+                    inFlight = true;
                     verticalVelocity = liftSpeed;
                     flightStamina -= Time.deltaTime*staminaDepletion;
                 }
             }
             // Reset + Regen
-            else if (isGrounded) {
+            else if (isGrounded && verticalVelocity <=0) {
                 flightInputDelayTime = 0;
                 verticalVelocity = -1f;
                 flightStamina = Mathf.Min(flightStamina+staminaRegen*Time.deltaTime, flightMaxStamina);
+                inFlight = false;
             }
         }
         
@@ -140,14 +153,18 @@ public class Player : MonoBehaviour
         }
         
         // Shoot
-        if (shootAction.inProgress){
+        if (shootAction.inProgress && shotDelayTimer<=0){
             GameObject newBullet = Instantiate(bullet, gunTip.position, aimObject.rotation);
             newBullet.GetComponent<Bullet>().Fire();
+            shotDelayTimer = shotDelay;
+        }
+        else {
+            shotDelayTimer -= Time.deltaTime;
         }
     }
     
     void Damage(Vector3 enemyPos){
-        if (knockbackTime<=0){
+        if (knockbackTimeLeft<=0){
             currHealth--;
             if (currHealth <= 0 && KillPlayer!=null){
                 KillPlayer();
@@ -159,9 +176,22 @@ public class Player : MonoBehaviour
         }
     }
     
-    private void OnTriggerEnter(Collider other) {
-        if (other.tag == "Enemy"){
-            Damage(other.ClosestPoint(transform.position));
+    public void Damage(uint damage, Vector3 enemyPos){
+        if (knockbackTimeLeft<=0){
+            currHealth -= damage;
+            if (currHealth <= 0 && KillPlayer!=null){
+                KillPlayer();
+            }
+            knockbackTimeLeft = knockbackTime;
+            Vector2 temp = (transform.position-enemyPos).normalized;
+            horizontalVelocity = temp.x*knockbackForce;
+            verticalVelocity = temp.y*knockbackForce;
         }
     }
+    
+    // private void OnTriggerEnter(Collider other) {
+    //     if (other.tag == "Enemy"){
+    //         Damage(other.ClosestPoint(transform.position));
+    //     }
+    // }
 }
