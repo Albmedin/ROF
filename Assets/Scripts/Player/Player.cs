@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class Player : MonoBehaviour
 {
@@ -58,6 +59,7 @@ public class Player : MonoBehaviour
     CharacterController chaCon;
     PlayerInput playerInput;
     InputAction moveAction, mouseAction, shootAction, jumpAction, dashAction, interactAction;
+    CinemachineImpulseSource impulseSource;
     
     // Start is called before the first frame update
     void Start()
@@ -66,6 +68,8 @@ public class Player : MonoBehaviour
         
         chaCon = GetComponent<CharacterController>();
         
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+
         playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions.FindAction("Movement");
         mouseAction = playerInput.actions.FindAction("Mouse");
@@ -165,6 +169,8 @@ public class Player : MonoBehaviour
     
     void Damage(Vector3 enemyPos){
         if (knockbackTimeLeft<=0){
+            Debug.Log("ScreenShakedmg");
+            impulseSource.GenerateImpulse();
             currHealth--;
             if (currHealth <= 0 && KillPlayer!=null){
                 KillPlayer();
@@ -178,6 +184,8 @@ public class Player : MonoBehaviour
     
     public void Damage(uint damage, Vector3 enemyPos){
         if (knockbackTimeLeft<=0){
+            Debug.Log("ScreenShakedmg");
+            impulseSource.GenerateImpulse();
             currHealth -= damage;
             if (currHealth <= 0 && KillPlayer!=null){
                 KillPlayer();
