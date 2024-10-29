@@ -16,9 +16,11 @@ public class Player : MonoBehaviour
     [SerializeField] float knockbackForce = 3f;
     [Header("Weapon")]
     [SerializeField] float shotDelay = 0.5f;
+    [SerializeField] float chargeTimeMax = 0.75f;
     [SerializeField] Transform aimObject;
     [SerializeField] Transform gunTip;
     [SerializeField] GameObject bullet;
+    [SerializeField] GameObject bullet2;
     [Header("Ground Movement")]
     [SerializeField] float speedMultiplier = 1f;
     [SerializeField] float gravity = -9.81f;
@@ -55,11 +57,13 @@ public class Player : MonoBehaviour
     float knockbackTimeLeft = 0;
     float shotDelayTimer = 0;
     
+    float chargeTime = 0;
+    
     // Internal Components
     SpriteRenderer playerSprite;
     CharacterController chaCon;
     PlayerInput playerInput;
-    InputAction moveAction, mouseAction, shootAction, jumpAction, dashAction, interactAction;
+    InputAction moveAction, mouseAction, shootAction, specialAction, jumpAction, dashAction, interactAction;
     CinemachineImpulseSource impulseSource;
     
     // Start is called before the first frame update
@@ -75,6 +79,7 @@ public class Player : MonoBehaviour
         moveAction = playerInput.actions.FindAction("Movement");
         mouseAction = playerInput.actions.FindAction("Mouse");
         shootAction = playerInput.actions.FindAction("Shoot");
+        specialAction = playerInput.actions.FindAction("Special");
         jumpAction = playerInput.actions.FindAction("Jump");
         dashAction = playerInput.actions.FindAction("Dash");
         interactAction = playerInput.actions.FindAction("Interact");
@@ -162,9 +167,22 @@ public class Player : MonoBehaviour
             GameObject newBullet = Instantiate(bullet, gunTip.position, aimObject.rotation);
             newBullet.GetComponent<Bullet>().Fire();
             shotDelayTimer = shotDelay;
+            chargeTime = 0;
         }
         else {
             shotDelayTimer -= Time.deltaTime;
+        }
+        
+        // Special
+        if (specialAction.inProgress) {
+            chargeTime += Time.deltaTime;
+        }
+        else {
+            if (chargeTime >= chargeTimeMax) {
+                GameObject newBullet = Instantiate(bullet2, gunTip.position, aimObject.rotation);
+                newBullet.GetComponent<Bullet>().Fire();
+            }
+            chargeTime = 0;
         }
     }
     
