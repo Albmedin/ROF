@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     [SerializeField] float knockbackTime = 0.25f;
     [SerializeField] float knockbackForce = 3f;
     [Header("Weapon")]
-    [SerializeField] float shotDelay = 0.5f;
+    [SerializeField] float shotDelay = 0.4f;
     [SerializeField] float chargeTimeMax = 0.75f;
     [SerializeField] Transform aimObject;
     [SerializeField] Transform gunTip;
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashTime = 0.25f;
     [SerializeField] float dashMultiplier = 2f;
     [SerializeField] float dashCooldownTime = 0.5f;
-    [SerializeField] float jumpHeight = 5f;
+    [SerializeField] float jumpHeight = 0.5f;
     [Header("Flight")]
     [SerializeField] float airSpeed = 4.5f;
     [SerializeField] float liftSpeed = 3.5f;
@@ -38,7 +38,7 @@ public class Player : MonoBehaviour
     [SerializeField] float flightStamina = 5f;
     public float FlightStamina {get{return flightStamina;}}
     [SerializeField] float staminaDepletion = 1f;
-    [SerializeField] float staminaRegen = 1.25f;
+    [SerializeField] float staminaRegen = 3.75f;
     [SerializeField] float flightInputDelay = 0.14f;
     
     [Header("Test")]
