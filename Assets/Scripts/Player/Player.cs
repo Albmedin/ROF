@@ -154,6 +154,7 @@ public class Player : MonoBehaviour
                 verticalVelocity = -1f;
                 flightStamina = Mathf.Min(flightStamina+staminaRegen*Time.deltaTime, flightMaxStamina);
                 inFlight = false;
+                inLift = false;
             }
         }
         
