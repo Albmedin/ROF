@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     public uint CurrentHealth {get{return currHealth;}}
     [SerializeField] float knockbackTime = 0.25f;
     [SerializeField] float knockbackForce = 3f;
+    [SerializeField] int slowStacks = 0;
+    [SerializeField] float slowStackTime = 3f;
     [Header("Weapon")]
     [SerializeField] float shotDelay = 0.4f;
     [SerializeField] float chargeTimeMax = 0.75f;
@@ -22,7 +24,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bullet2;
     [Header("Ground Movement")]
-    [SerializeField] float speedMultiplier = 1f;
+    [SerializeField] float normalSpeed = 1f;
+    [SerializeField] float slowSpeed = 0.5f;
     [SerializeField] float gravity = -30f;
     [SerializeField] float terminalVelocity = -20f;
     [SerializeField] float groundSpeed = 3f;
@@ -40,12 +43,13 @@ public class Player : MonoBehaviour
     [SerializeField] float staminaDepletion = 1f;
     [SerializeField] float staminaRegen = 3.75f;
     [SerializeField] float flightInputDelay = 0.14f;
-    
+
     [Header("Test")]
-    
+
     // Public Variables
     public Action KillPlayer;
-    
+    public Action DashPlayer;
+
     // Internal Variables
     bool isGrounded = true;
     bool inFlight = false;
@@ -58,23 +62,24 @@ public class Player : MonoBehaviour
     bool damaged = false;
     float knockbackTimeLeft = 0;
     float shotDelayTimer = 0;
-    
+    float slowTimer = 0f;
+
     float chargeTime = 0;
-    
+
     // Internal Components
     SpriteRenderer playerSprite;
     CharacterController chaCon;
     PlayerInput playerInput;
     InputAction moveAction, mouseAction, shootAction, specialAction, jumpAction, dashAction, interactAction;
     CinemachineImpulseSource impulseSource;
-    
+
     // Start is called before the first frame update
     void Start()
     {
         playerSprite = GetComponentInChildren<SpriteRenderer>();
-        
+
         chaCon = GetComponent<CharacterController>();
-        
+
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
         playerInput = GetComponent<PlayerInput>();
@@ -93,10 +98,10 @@ public class Player : MonoBehaviour
         Movement();
         GunManager();
     }
-    
+
     void Movement(){
         isGrounded = chaCon.isGrounded;
-        
+
         // Damage knockback
         if(knockbackTimeLeft>0){
             knockbackTimeLeft -= Time.deltaTime;
@@ -104,12 +109,17 @@ public class Player : MonoBehaviour
         else {
             // Horizontal Movement
             float adjustedSpeed = !inFlight ? groundSpeed : airSpeed;
-            
+
             // Dash
             if (horizontalVelocity != 0 && dashAction.triggered && dashCooldownTimer<=0){
                 dashTimer = dashTime;
                 dashCooldownTimer = dashCooldownTime;
                 horizontalVelocity *= dashMultiplier;
+                slowStacks = 0;
+                if(DashPlayer != null){
+                    DashPlayer();
+                    DashPlayer = null;
+                }
             }
             else if (dashTimer>0){
                 dashTimer -= Time.deltaTime;
@@ -118,7 +128,16 @@ public class Player : MonoBehaviour
                 horizontalVelocity = moveAction.ReadValue<float>()*adjustedSpeed;
                 dashCooldownTimer -= Time.deltaTime;
             }
-            
+
+            horizontalVelocity *= (slowStacks>0) ? slowSpeed : normalSpeed;
+            if (slowStacks>0){
+                if (slowTimer<=0){
+                    slowStacks--;
+                    slowTimer = slowStackTime;
+                }
+                slowTimer -= Time.deltaTime;
+            }
+
             // Flip sprite
             if (horizontalVelocity < 0) {
                 playerSprite.flipX = true;
@@ -126,7 +145,7 @@ public class Player : MonoBehaviour
             else if (horizontalVelocity > 0) {
                 playerSprite.flipX = false;
             }
-            
+
             // Jump
             if (jumpAction.triggered && isGrounded){
                 verticalVelocity = Mathf.Sqrt(Mathf.Abs(jumpHeight*2f*gravity));
@@ -158,23 +177,23 @@ public class Player : MonoBehaviour
                 inLift = false;
             }
         }
-        
+
         // Gravity
         verticalVelocity += gravity * Time.deltaTime;
         verticalVelocity = Math.Max(verticalVelocity, terminalVelocity);
 
         chaCon.Move(new Vector3(horizontalVelocity, verticalVelocity, 0)*Time.deltaTime);
     }
-    
+
     void GunManager(){
         // Aim Gun
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(mouseAction.ReadValue<Vector2>());
-        
+
         if (Physics.Raycast(ray, out hit)){
             aimObject.LookAt(new Vector3(hit.point.x, hit.point.y, transform.position.z));
         }
-        
+
         // Shoot
         if (shootAction.inProgress && shotDelayTimer<=0){
             GameObject newBullet = Instantiate(bullet, gunTip.position, aimObject.rotation);
@@ -185,7 +204,7 @@ public class Player : MonoBehaviour
         else {
             shotDelayTimer -= Time.deltaTime;
         }
-        
+
         // Special
         if (specialAction.inProgress) {
             chargeTime += Time.deltaTime;
@@ -198,7 +217,7 @@ public class Player : MonoBehaviour
             chargeTime = 0;
         }
     }
-    
+
     void Damage(Vector3 enemyPos){
         if (knockbackTimeLeft<=0){
             Debug.Log("ScreenShakedmg");
@@ -213,7 +232,11 @@ public class Player : MonoBehaviour
             verticalVelocity = temp.y*knockbackForce;
         }
     }
-    
+
+    public void Damage(uint damage){
+        currHealth -= damage;
+    }
+
     public void Damage(uint damage, Vector3 enemyPos){
         if (knockbackTimeLeft<=0){
             Debug.Log("ScreenShakedmg");
@@ -228,7 +251,21 @@ public class Player : MonoBehaviour
             verticalVelocity = temp.y*knockbackForce;
         }
     }
-    
+
+    public void Damage(uint damage, int sStacks, Vector3 enemyPos){
+        if (knockbackTimeLeft<=0){
+            currHealth -= damage;
+            slowStacks += sStacks;
+            if (currHealth <= 0 && KillPlayer!=null){
+                KillPlayer();
+            }
+            knockbackTimeLeft = knockbackTime;
+            Vector2 temp = (transform.position-enemyPos).normalized;
+            horizontalVelocity = temp.x*knockbackForce;
+            verticalVelocity = temp.y*knockbackForce;
+        }
+    }
+
     // private void OnTriggerEnter(Collider other) {
     //     if (other.tag == "Enemy"){
     //         Damage(other.ClosestPoint(transform.position));
