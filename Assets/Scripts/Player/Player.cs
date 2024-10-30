@@ -13,13 +13,16 @@ public class Player : MonoBehaviour
     public uint CurrentHealth {get{return currHealth;}}
     [SerializeField] float knockbackTime = 0.25f;
     [SerializeField] float knockbackForce = 3f;
+    [SerializeField] int slowStacks = 0;
+    [SerializeField] float slowStackTime = 3f;
     [Header("Weapon")]
     [SerializeField] float shotDelay = 0.5f;
     [SerializeField] Transform aimObject;
     [SerializeField] Transform gunTip;
     [SerializeField] GameObject bullet;
     [Header("Ground Movement")]
-    [SerializeField] float speedMultiplier = 1f;
+    [SerializeField] float normalSpeed = 1f;
+    [SerializeField] float slowSpeed = 0.5f;
     [SerializeField] float gravity = -9.81f;
     [SerializeField] float groundSpeed = 3f;
     [SerializeField] float dashTime = 0.25f;
@@ -41,6 +44,7 @@ public class Player : MonoBehaviour
     
     // Public Variables
     public Action KillPlayer;
+    public Action DashPlayer;
     
     // Internal Variables
     bool isGrounded = true;
@@ -53,6 +57,7 @@ public class Player : MonoBehaviour
     bool damaged = false;
     float knockbackTimeLeft = 0;
     float shotDelayTimer = 0;
+    float slowTimer = 0f;
     
     // Internal Components
     SpriteRenderer playerSprite;
@@ -99,6 +104,11 @@ public class Player : MonoBehaviour
                 dashTimer = dashTime;
                 dashCooldownTimer = dashCooldownTime;
                 horizontalVelocity *= dashMultiplier;
+                slowStacks = 0;
+                if(DashPlayer != null){
+                    DashPlayer();
+                    DashPlayer = null;
+                }
             }
             else if (dashTimer>0){
                 dashTimer -= Time.deltaTime;
@@ -106,6 +116,15 @@ public class Player : MonoBehaviour
             else {
                 horizontalVelocity = moveAction.ReadValue<float>()*adjustedSpeed;
                 dashCooldownTimer -= Time.deltaTime;
+            }
+            
+            horizontalVelocity *= (slowStacks>0) ? slowSpeed : normalSpeed;
+            if (slowStacks>0){
+                if (slowTimer<=0){
+                    slowStacks--;
+                    slowTimer = slowStackTime;
+                }
+                slowTimer -= Time.deltaTime;
             }
             
             // Flip sprite
@@ -177,9 +196,27 @@ public class Player : MonoBehaviour
         }
     }
     
+    public void Damage(uint damage){
+        currHealth -= damage;
+    }
+    
     public void Damage(uint damage, Vector3 enemyPos){
         if (knockbackTimeLeft<=0){
             currHealth -= damage;
+            if (currHealth <= 0 && KillPlayer!=null){
+                KillPlayer();
+            }
+            knockbackTimeLeft = knockbackTime;
+            Vector2 temp = (transform.position-enemyPos).normalized;
+            horizontalVelocity = temp.x*knockbackForce;
+            verticalVelocity = temp.y*knockbackForce;
+        }
+    }
+    
+    public void Damage(uint damage, int sStacks, Vector3 enemyPos){
+        if (knockbackTimeLeft<=0){
+            currHealth -= damage;
+            slowStacks += sStacks;
             if (currHealth <= 0 && KillPlayer!=null){
                 KillPlayer();
             }

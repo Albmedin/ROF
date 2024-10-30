@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MaleSpider : Enemy
+public class FemaleSpider : Enemy
 {
     enum EnemyState {Patrol, Alert, Shoot, Charge};
     
@@ -33,6 +33,12 @@ public class MaleSpider : Enemy
     [SerializeField] LayerMask rayCastLayers;
     [SerializeField] SpriteRenderer sprite;
     
+    [Header("Spawn")]
+    [SerializeField] List<GameObject> spawnedChildren = new List<GameObject>();
+    [SerializeField] int spwanNumMax = 5;
+    [SerializeField] float spawnDelay = 1f;
+    [SerializeField] GameObject spawnChild;
+    
     // Internal Variables
     EnemyState activeState = EnemyState.Patrol;
     float shootTimer = 0f;
@@ -42,6 +48,7 @@ public class MaleSpider : Enemy
     float chargeTimer = 0f;
     float chargeSide = 0f;
     float actionTimer = 0f;
+    System.Action ChangeChildren;
     
     // Internal Components
     NavMeshAgent agent;
@@ -57,6 +64,8 @@ public class MaleSpider : Enemy
         
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
+        
+        ChangeChildren = () => {return;};
         
         PatrolInit();
     }
@@ -75,6 +84,21 @@ public class MaleSpider : Enemy
         if (Mathf.Abs(agent.velocity.x) > 0){
             sprite.transform.right = new Vector3(-agent.velocity.x, 0, 0);
         }
+        
+        foreach (GameObject child in spawnedChildren){
+            if (!child){
+                ChangeChildren += () => {spawnedChildren.Remove(child);};
+            }
+        }
+        
+        if (ChangeChildren != null){
+            ChangeChildren();
+            ChangeChildren = null;
+            if (spawnedChildren.Count == 0) {
+                StartCoroutine(SpawnChildren());
+            }
+        }
+        
         
         switch (activeState){
             case EnemyState.Alert:
@@ -257,7 +281,7 @@ public class MaleSpider : Enemy
             float lower = Mathf.Atan((left-right)/(g*x));
             
             if (!float.IsNaN(upper)||!float.IsNaN(lower)){
-                float angle = !float.IsNaN(upper) ? upper : lower;
+                float angle = !float.IsNaN(lower) ? lower : upper;
                 angle = Mathf.Abs(angle);
                 dir = new Vector3(Mathf.Cos(angle)*Mathf.Sign(dir.x), Mathf.Sin(angle), 0);
             }
@@ -294,5 +318,15 @@ public class MaleSpider : Enemy
         }
         agent.autoBraking = false;
         agent.SetDestination(player.transform.position);
+    }
+    
+    IEnumerator SpawnChildren(){
+        int count = 0;
+        while (count < spwanNumMax){
+            GameObject tempChild = Instantiate(spawnChild, transform.position, spawnChild.transform.rotation);
+            spawnedChildren.Add(tempChild);
+            count++;
+            yield return new WaitForSeconds(spawnDelay);
+        }
     }
 }

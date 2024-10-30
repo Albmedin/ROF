@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] Image healthBar;
     [Header("Attack")]
     [SerializeField] uint bodyDamage = 1;
+    public uint BodyDamage {get{return bodyDamage;}}
     [SerializeField] float warningTime = 1f;
     
     // Internal Variables
@@ -26,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
     
-    public void Damage(uint damage){
+    public virtual void Damage(uint damage){
         currHealth -= damage;
         healthBar.fillAmount = (float)currHealth/maxHealth;
         animator.SetTrigger("Hit");
@@ -46,7 +47,7 @@ public abstract class Enemy : MonoBehaviour
         }
     }
     
-    private void OnCollisionEnter(Collision other) {
+    public virtual void OnCollisionEnter(Collision other) {
         if (other.gameObject.tag == "Player") {
             player.Damage(bodyDamage, transform.position);
         }
