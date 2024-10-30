@@ -48,6 +48,7 @@ public class Player : MonoBehaviour
     // Internal Variables
     bool isGrounded = true;
     bool inFlight = false;
+    bool inLift = false;
     float horizontalVelocity = 0;
     float dashTimer = 0;
     float dashCooldownTimer = 0;
@@ -132,11 +133,20 @@ public class Player : MonoBehaviour
             // Flight
             else if (jumpAction.inProgress && flightStamina > 0 && !isGrounded){
                 flightInputDelayTime += Time.deltaTime;
-                if (flightInputDelayTime >= flightInputDelay){
+                if (flightInputDelayTime >= flightInputDelay) {
                     inFlight = true;
+                    inLift = true;
                     verticalVelocity = liftSpeed;
                     flightStamina -= Time.deltaTime*staminaDepletion;
                 }
+            }
+            // Flight but not lifting
+            else if (!isGrounded) {
+                // Reset vertical velocity immediately after stopping lift
+                if (inLift) {
+                    verticalVelocity = 0;
+                }
+                inLift = false;
             }
             // Reset + Regen
             else if (isGrounded && verticalVelocity <=0) {
