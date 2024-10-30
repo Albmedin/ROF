@@ -176,8 +176,8 @@ Transform:
   m_GameObject: {fileID: 1224618096087825084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: -0.45418, z: 0}
+  m_LocalScale: {x: 1.5132, y: 1.5132, z: 1.0088}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 8000896314516582802}
@@ -223,7 +223,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3437192223126484736, guid: c5b3899fb0a79d54c9074e8d74ef6a84, type: 3}
+  m_Sprite: {fileID: 7452795253554617108, guid: 75d4590defe282e488fa1172f0842dff, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -476,6 +476,7 @@ MonoBehaviour:
   aimObject: {fileID: 680032540490959830}
   gunTip: {fileID: 4163393931250344722}
   bullet: {fileID: 4237827423757216220, guid: c1e3985c1d534274daba75f6ea0ab41c, type: 3}
+  speedMultiplier: 1
   gravity: -9.81
   groundSpeed: 4
   dashTime: 0.25
@@ -657,8 +658,8 @@ Transform:
   m_GameObject: {fileID: 7766906747061592428}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: 0, y: -0.02413, z: 1}
+  m_LocalScale: {x: 2.3712, y: 2.3712, z: 2.3712}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4163393931250344722}
@@ -705,7 +706,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -3635393328576677185, guid: b25ed7bef8a646f44bd8ab3e136a995f, type: 3}
+  m_Sprite: {fileID: -1912379310005908109, guid: d38b53996648e1b4cb2c7a499adec4c9, type: 3}
   m_Color: {r: 0.78113204, g: 0.2815023, b: 0.2815023, a: 1}
   m_FlipX: 0
   m_FlipY: 0
