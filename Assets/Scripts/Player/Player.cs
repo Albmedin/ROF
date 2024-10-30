@@ -23,22 +23,23 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject bullet2;
     [Header("Ground Movement")]
     [SerializeField] float speedMultiplier = 1f;
-    [SerializeField] float gravity = -9.81f;
+    [SerializeField] float gravity = -30f;
+    [SerializeField] float terminalVelocity = -20f;
     [SerializeField] float groundSpeed = 3f;
     [SerializeField] float dashTime = 0.25f;
     [SerializeField] float dashMultiplier = 2f;
     [SerializeField] float dashCooldownTime = 0.5f;
     [SerializeField] float jumpHeight = 5f;
     [Header("Flight")]
-    [SerializeField] float airSpeed = 1.5f;
-    [SerializeField] float liftSpeed = 3f;
+    [SerializeField] float airSpeed = 4.5f;
+    [SerializeField] float liftSpeed = 3.5f;
     [SerializeField] float flightMaxStamina = 5f;
     public float FlightMaxStamina {get{return flightMaxStamina;}}
     [SerializeField] float flightStamina = 5f;
     public float FlightStamina {get{return flightStamina;}}
     [SerializeField] float staminaDepletion = 1f;
-    [SerializeField] float staminaRegen = 1f;
-    [SerializeField] float flightInputDelay = 0.25f;
+    [SerializeField] float staminaRegen = 1.25f;
+    [SerializeField] float flightInputDelay = 0.14f;
     
     [Header("Test")]
     
@@ -159,8 +160,9 @@ public class Player : MonoBehaviour
         }
         
         // Gravity
-        verticalVelocity += gravity*Time.deltaTime;
-        
+        verticalVelocity += gravity * Time.deltaTime;
+        verticalVelocity = Math.Max(verticalVelocity, terminalVelocity);
+
         chaCon.Move(new Vector3(horizontalVelocity, verticalVelocity, 0)*Time.deltaTime);
     }
     

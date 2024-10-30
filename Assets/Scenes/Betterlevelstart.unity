@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4248,6 +4248,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: bullet2
+      value: 
+      objectReference: {fileID: 4237827423757216220, guid: 6b2ea86292cc9634a800d16c699321f1, type: 3}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: gravity
+      value: -30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: airSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: liftSpeed
+      value: 3.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: jumpHeight
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: groundSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: staminaRegen
+      value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: dashMultiplier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: dashCooldownTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: flightInputDelay
+      value: 0.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3751664386008926071, guid: 50463649464b55441b91e22b63309990, type: 3}
+      propertyPath: terminalVelocity
+      value: -20
+      objectReference: {fileID: 0}
     - target: {fileID: 6363857728280108077, guid: 50463649464b55441b91e22b63309990, type: 3}
       propertyPath: m_Name
       value: Player
