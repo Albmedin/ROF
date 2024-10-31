@@ -624,8 +624,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d4e44d7a19f7ab46aa860e03f55e213, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
-  currHealth: 10
+  maxHealth: 3
+  currHealth: 3
   healthBar: {fileID: 7660111771222757025}
   bodyDamage: 1
   warningTime: 1
