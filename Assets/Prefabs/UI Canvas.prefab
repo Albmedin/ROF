@@ -2003,12 +2003,12 @@ MonoBehaviour:
   - ID: 0
     title: <b>Primary Fire</b>
     body: A basic goo-ball propelled at enemies
-    sprite: {fileID: -1912379310005908109, guid: d38b53996648e1b4cb2c7a499adec4c9, type: 3}
+    sprite: {fileID: -2414628221243539506, guid: 86c6746296ed42e4dacf84ceb0cfd128, type: 3}
   - ID: 0
     title: <b>Secondary Fire</b>
     body: Hold down to charge a larger, gooier goo-ball. The longer you hold it down,
       the deadlier.
-    sprite: {fileID: -1912379310005908109, guid: d38b53996648e1b4cb2c7a499adec4c9, type: 3}
+    sprite: {fileID: 377889727691150715, guid: 98a9f682a5a2e7d4fa7e6fc7190c7fd0, type: 3}
   - ID: 0
     title: <i>Baby Spider</i>
     body: "The youngest of the spiders that you will only encounter when fighting
