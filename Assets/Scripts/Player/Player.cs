@@ -8,10 +8,10 @@ using Cinemachine;
 public class Player : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] uint maxHealth = 10;
-    public uint MaxHealth {get{return maxHealth;}}
-    [SerializeField] uint currHealth = 10;
-    public uint CurrentHealth {get{return currHealth;}}
+    [SerializeField] int maxHealth = 10;
+    public int MaxHealth {get{return maxHealth;}}
+    [SerializeField] int currHealth = 10;
+    public int CurrentHealth {get{return currHealth;}}
     [SerializeField] float knockbackTime = 0.25f;
     [SerializeField] float knockbackForce = 3f;
     [SerializeField] int slowStacks = 0;
@@ -49,6 +49,7 @@ public class Player : MonoBehaviour
     // Public Variables
     public Action KillPlayer;
     public Action DashPlayer;
+    public Action PauseGame;
 
     // Internal Variables
     bool isGrounded = true;
@@ -90,6 +91,8 @@ public class Player : MonoBehaviour
         jumpAction = playerInput.actions.FindAction("Jump");
         dashAction = playerInput.actions.FindAction("Dash");
         interactAction = playerInput.actions.FindAction("Interact");
+        
+        KillPlayer += playerInput.DeactivateInput;
     }
 
     // Update is called once per frame
@@ -233,11 +236,11 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Damage(uint damage){
+    public void Damage(int damage){
         currHealth -= damage;
     }
 
-    public void Damage(uint damage, Vector3 enemyPos){
+    public void Damage(int damage, Vector3 enemyPos){
         if (knockbackTimeLeft<=0){
             Debug.Log("ScreenShakedmg");
             impulseSource.GenerateImpulse();
@@ -252,8 +255,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void Damage(uint damage, int sStacks, Vector3 enemyPos){
+    public void Damage(int damage, int sStacks, Vector3 enemyPos){
         if (knockbackTimeLeft<=0){
+            impulseSource.GenerateImpulse();
             currHealth -= damage;
             slowStacks += sStacks;
             if (currHealth <= 0 && KillPlayer!=null){
@@ -263,6 +267,13 @@ public class Player : MonoBehaviour
             Vector2 temp = (transform.position-enemyPos).normalized;
             horizontalVelocity = temp.x*knockbackForce;
             verticalVelocity = temp.y*knockbackForce;
+        }
+    }
+
+    void OnPause(){
+        Debug.Log("Paused Game");
+        if(PauseGame != null){
+            PauseGame();
         }
     }
 

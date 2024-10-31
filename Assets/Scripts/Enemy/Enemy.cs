@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] uint maxHealth = 10;
-    public uint MaxHealth {get{return maxHealth;}}
-    [SerializeField] uint currHealth = 10;
-    public uint CurrentHealth {get{return currHealth;}}
+    [SerializeField] int maxHealth = 10;
+    public int MaxHealth {get{return maxHealth;}}
+    [SerializeField] int currHealth = 10;
+    public int CurrentHealth {get{return currHealth;}}
     [SerializeField] Image healthBar;
     [Header("Attack")]
-    [SerializeField] uint bodyDamage = 1;
-    public uint BodyDamage {get{return bodyDamage;}}
+    [SerializeField] int bodyDamage = 1;
+    public int BodyDamage {get{return bodyDamage;}}
     [SerializeField] float warningTime = 1f;
     
     // Internal Variables
@@ -27,7 +27,7 @@ public abstract class Enemy : MonoBehaviour
         animator = GetComponent<Animator>();
     }
     
-    public virtual void Damage(uint damage){
+    public virtual void Damage(int damage){
         currHealth -= damage;
         healthBar.fillAmount = (float)currHealth/maxHealth;
         animator.SetTrigger("Hit");

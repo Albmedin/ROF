@@ -27,7 +27,7 @@ public class TinySpider : Enemy
     [Header("Attached")]
     [SerializeField] bool damagePlayer = true;
     [SerializeField] float tickTime = 2f;
-    [SerializeField] uint tickDamage = 1;
+    [SerializeField] int tickDamage = 1;
     [SerializeField] float shakeDelay = 0.5f;
     
     [Header("Behavior")]
@@ -293,7 +293,7 @@ public class TinySpider : Enemy
         SwitchActiveState(EnemyState.Alert);
     }
     
-    public override void Damage(uint damage){
+    public override void Damage(int damage){
         base.Damage(damage);
         if (activeState == EnemyState.Charge){
             SwitchActiveState(EnemyState.Alert);
