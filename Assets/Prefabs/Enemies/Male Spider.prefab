@@ -811,7 +811,7 @@ MonoBehaviour:
   chargingSpeed: 10
   chargeWindup: 1
   shotCount: 3
-  delayBetweenShots: 1
+  delayBetweenShots: 0.25
   delayBeforeShooting: 1
   shootCooldown: 3
   bullet: {fileID: 664141622652987462, guid: 29b047909b4cc6f45a36f706ea43325a, type: 3}
