@@ -2364,7 +2364,6 @@ MonoBehaviour:
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
-    serializedVersion: 2
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
@@ -2378,6 +2377,8 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
+  m_LastPosition: {x: 89.2, y: 27.269999, z: 0}
+  m_LastRotation: {x: -0, y: -0, z: -0, w: 1}
 --- !u!1001 &1020173567
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2799,7 +2800,6 @@ MonoBehaviour:
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
-    serializedVersion: 2
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
@@ -2813,6 +2813,8 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
+  m_LastPosition: {x: 67.09, y: 26.89, z: 0}
+  m_LastRotation: {x: -0, y: -0, z: -0, w: 1}
 --- !u!1001 &1134984201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3134,7 +3136,6 @@ MonoBehaviour:
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
-    serializedVersion: 2
     m_Bits: 128
   m_UseGeometry: 0
   m_DefaultArea: 0
@@ -3148,6 +3149,8 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: e0a68f6f3960991408e463bc19e333b3, type: 2}
   m_BuildHeightMesh: 1
+  m_LastPosition: {x: 0, y: 1.439, z: 0}
+  m_LastRotation: {x: 0, y: 0, z: 0, w: 1}
 --- !u!4 &1199240312
 Transform:
   m_ObjectHideFlags: 0
@@ -3805,7 +3808,6 @@ MonoBehaviour:
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
-    serializedVersion: 2
     m_Bits: 4294967295
   m_UseGeometry: 0
   m_DefaultArea: 0
@@ -3819,6 +3821,8 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 0}
   m_BuildHeightMesh: 0
+  m_LastPosition: {x: 78.4, y: 29.67, z: 0}
+  m_LastRotation: {x: -0, y: -0, z: -0, w: 1}
 --- !u!4 &1446391213 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 109777703887680053, guid: 2c06d56414b3be148b1ffbddbd067688, type: 3}
@@ -4588,10 +4592,14 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 239378781582670930, guid: d915f5f18998c1540b352846c0d2bf2d, type: 3}
-    - target: {fileID: -7255168901617812561, guid: 1df96783316e57b4b9de9009aa63e086, type: 3}
+    - target: {fileID: -7849268929617644440, guid: 1df96783316e57b4b9de9009aa63e086, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 239378781582670930, guid: f3115d3ef0645ef49907ea249f068df4, type: 3}
+    - target: {fileID: -7255168901617812561, guid: 1df96783316e57b4b9de9009aa63e086, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 239378781582670930, guid: 460ca8fb94217c642a8fdbf0e388616b, type: 3}
     - target: {fileID: -3589387598406372022, guid: 1df96783316e57b4b9de9009aa63e086, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.8498403
@@ -6371,7 +6379,7 @@ MonoBehaviour:
   aimObject: {fileID: 1765395456}
   gunTip: {fileID: 303560843}
   bullet: {fileID: 4237827423757216220, guid: c1e3985c1d534274daba75f6ea0ab41c, type: 3}
-  bullet2: {fileID: 4237827423757216220, guid: 6b2ea86292cc9634a800d16c699321f1, type: 3}
+  bullet2: {fileID: 0}
   normalSpeed: 1
   slowSpeed: 0.5
   gravity: -30
