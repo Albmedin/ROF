@@ -96,8 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   existTime: 10
-  speed: 10
-  damage: 1
+  speed: 15
+  damage: 2
   slowStacks: 1
 --- !u!1 &6764698735304773181
 GameObject:
