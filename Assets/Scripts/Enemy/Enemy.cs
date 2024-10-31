@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public abstract class Enemy : MonoBehaviour
 {
     [Header("Health")]
-    [SerializeField] uint maxHealth = 10;
-    public uint MaxHealth {get{return maxHealth;}}
-    [SerializeField] uint currHealth = 10;
-    public uint CurrentHealth {get{return currHealth;}}
+    [SerializeField] int maxHealth = 10;
+    public int MaxHealth {get{return maxHealth;}}
+    [SerializeField] int currHealth = 10;
+    public int CurrentHealth {get{return currHealth;}}
     [SerializeField] Image healthBar;
     [Header("Attack")]
-    [SerializeField] uint bodyDamage = 1;
-    [SerializeField] int warningTime = 1;
+    [SerializeField] int bodyDamage = 1;
+    public int BodyDamage {get{return bodyDamage;}}
+    [SerializeField] float warningTime = 1f;
     
     // Internal Variables
     bool indicatedAttack = false;
@@ -23,31 +24,35 @@ public abstract class Enemy : MonoBehaviour
     public void AbstractStart()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
     
-    public void Damage(uint damage){
+    public virtual void Damage(int damage){
         currHealth -= damage;
         healthBar.fillAmount = (float)currHealth/maxHealth;
         animator.SetTrigger("Hit");
         if (currHealth <= 0){
-            Destroy(gameObject);
+            Die();
         }
+    }
+    
+    public virtual void Die(){
+        Destroy(gameObject);
     }
     
     public void IndicateAttack(float timer){
         if (timer <= warningTime && !indicatedAttack){
             animator.SetTrigger("Warn");
-            animator.SetFloat("Warn Time", warningTime);
+            animator.SetFloat("Warn Time", 1f/warningTime);
             indicatedAttack = true;
         }
-        else if (timer > warningTime){
+        else if (timer >= warningTime){
             indicatedAttack = false;
         }
     }
     
-    private void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player") {
+    public virtual void OnTriggerEnter(Collider other) {
+        if (other.tag == "PlayerHitbox") {
             player.Damage(bodyDamage, transform.position);
         }
     }

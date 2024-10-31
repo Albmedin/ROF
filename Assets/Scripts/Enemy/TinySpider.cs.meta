@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 4d4e44d7a19f7ab46aa860e03f55e213
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - healthBar: {instanceID: 0}
+  - quoteSwordEndquote: {instanceID: 0}
+  - sprite: {fileID: 3626916397498700004, guid: 0778b2010402bc24ebd1f46986c56bcb, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

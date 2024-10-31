@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Special",
+                    "type": "Button",
+                    "id": "63285851-19d3-4bfb-976b-f2dcae0ebc79",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Jump",
                     "type": "Button",
                     "id": "40f8a4d4-20d0-468e-84fd-8149c39d1eb4",
@@ -54,6 +63,15 @@
                     "name": "Interact",
                     "type": "Button",
                     "id": "a4f8c069-8fd3-456a-a36f-1bdc249e9f42",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "c936c8b3-5fd8-44b4-8b29-df417c7cb817",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -159,6 +177,28 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2a8ce435-744f-4b68-a6ca-8534a60304c0",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Special",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1d826168-26ee-4fea-9c42-19fb94515bae",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -167,7 +207,7 @@
             "id": "db7f28bc-1ce5-4e3d-8fb5-51fab10035bd",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Pause",
                     "type": "Button",
                     "id": "e823592e-59fa-4dcd-b52a-8e8bbd92d265",
                     "expectedControlType": "Button",
@@ -180,11 +220,11 @@
                 {
                     "name": "",
                     "id": "55d1cc2f-05c0-4e80-ba00-3c917da98820",
-                    "path": "",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

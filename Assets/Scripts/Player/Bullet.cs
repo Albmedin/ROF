@@ -6,8 +6,9 @@ public abstract class Bullet : MonoBehaviour
 {
     [SerializeField] float existTime = 3f;
     [SerializeField] float speed = 5f;
-    [SerializeField] uint damage = 1;
-    public uint Damage {get{return damage;}}
+    public float Speed {get{return speed;}}
+    [SerializeField] int damage = 1;
+    public int Damage {get{return damage;}}
     
     Rigidbody rb;
     
@@ -29,5 +30,9 @@ public abstract class Bullet : MonoBehaviour
     
     public virtual void Fire(){
         rb.velocity = transform.forward*speed;
+    }
+    
+    public virtual void Fire(float vel){
+        rb.velocity = transform.forward*vel;
     }
 }
