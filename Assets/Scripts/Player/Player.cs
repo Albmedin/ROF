@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashTime = 0.25f;
     [SerializeField] float dashMultiplier = 2f;
     [SerializeField] float dashCooldownTime = 0.5f;
-    [SerializeField] float jumpHeight = 0.5f;
+    [SerializeField] float jumpHeight = 1f;
     [Header("Flight")]
     [SerializeField] float airSpeed = 4.5f;
     [SerializeField] float liftSpeed = 3.5f;
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
     public float FlightStamina {get{return flightStamina;}}
     [SerializeField] float staminaDepletion = 1f;
     [SerializeField] float staminaRegen = 3.75f;
-    [SerializeField] float flightInputDelay = 0.14f;
+    [SerializeField] float flightInputDelay = 0.2f;
 
     [Header("Test")]
 
