@@ -69,10 +69,12 @@ public class UIManager : MonoBehaviour
     }
     
     void EndGame(){
+        Time.timeScale = 0f;
         deathScreen.SetActive(true);
     }
     
     public void Restart(){
+        Time.timeScale = 1f;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     

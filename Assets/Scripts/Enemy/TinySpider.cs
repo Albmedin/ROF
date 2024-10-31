@@ -36,6 +36,7 @@ public class TinySpider : Enemy
     [SerializeField] float alertTime = 5f;
     [SerializeField] LayerMask rayCastLayers;
     [SerializeField] SpriteRenderer sprite;
+    [SerializeField] GameObject tinySpiderExplode;
     
     // Internal Variables
     EnemyState activeState = EnemyState.Patrol;
@@ -43,6 +44,8 @@ public class TinySpider : Enemy
     float patrolTimer = 0f;
     float alertTimer = 0f;
     float chargeTimer = 0f;
+    float chargeAbsoluteTime = 5f;
+    float chargeAbsoluteTimer = 0f;
     float chargeSide = 0f;
     float actionTimer = 0f;
     float tickTimer = 0f;
@@ -74,8 +77,16 @@ public class TinySpider : Enemy
             slashTimer -= Time.deltaTime;
         }
         
+        if (chargeTimer > 0){
+            chargeTimer -= Time.deltaTime;
+        }
+        
         if (Mathf.Abs(agent.velocity.x) > 0){
-            sprite.transform.right = new Vector3(-agent.velocity.x, 0, 0);
+            sprite.flipX = agent.velocity.x > 0;
+            animator.SetBool("Walking", true);
+        }
+        else {
+            animator.SetBool("Walking", false);
         }
         
         switch (activeState){
@@ -226,36 +237,44 @@ public class TinySpider : Enemy
             slashTimer = slashCooldown;
             SwitchActiveState(EnemyState.Alert);
         }
+        if (slashTimer <= 0.3f){
+            sprite.flipX = Mathf.Sign(player.transform.position.x-transform.position.x) == 1;
+            animator.SetTrigger("Attack");
+        }
         IndicateAttack(slashTimer);
         slashTimer -= Time.deltaTime;
     }
     
     void ChargeInit(){
         agent.speed = chargingSpeed;
+        chargeAbsoluteTimer = chargeAbsoluteTime;
         chargeSide = Mathf.Sign(player.transform.position.x-transform.position.x);
         IndicateAttack(999999f);
         StartCoroutine(ChargeStart());
     }
     
     void ChargeUpdate(){
-        if (Mathf.Sign(agent.destination.x-transform.position.x) != chargeSide && agent.velocity.magnitude < 0.1f){
+        if (Mathf.Sign(agent.destination.x-transform.position.x) != chargeSide && agent.velocity.magnitude < 0.1f || chargeAbsoluteTimer <= 0){
             agent.autoBraking = true;
             agent.SetDestination(transform.position);
             chargeTimer = chargeCooldown;
+            animator.SetFloat("Charging", 1f);
             SwitchActiveState(EnemyState.Alert);
             return;
         }
+        chargeAbsoluteTimer -= Time.deltaTime;
     }
     
     IEnumerator ChargeStart(){
         chargeTimer = chargeWindup;
         while (chargeTimer > 0){
-            chargeTimer -= Time.deltaTime;
+            // chargeTimer -= Time.deltaTime;
             IndicateAttack(chargeTimer);
             yield return null;
         }
         agent.autoBraking = false;
         agent.SetDestination(player.transform.position);
+        animator.SetFloat("Charging", 2);
     }
     
     void AttachedInit(){
@@ -299,9 +318,16 @@ public class TinySpider : Enemy
             SwitchActiveState(EnemyState.Alert);
         }
     }
-    
-    public override void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player") {
+
+    public override void Die()
+    {
+        Instantiate(tinySpiderExplode, transform.position, transform.rotation);
+        base.Die();
+    }
+
+    public override void OnTriggerEnter(Collider other) {
+        Debug.Log("I work");
+        if (other.tag == "PlayerHitbox") {
             if (activeState == EnemyState.Charge){
                 player.Damage(BodyDamage, damagePlayer ? 0 : 100, transform.position);
                 SwitchActiveState(EnemyState.Attached);
@@ -315,6 +341,7 @@ public class TinySpider : Enemy
     private void OnDestroy() {
         if (activeState == EnemyState.Attached){
             player.DashPlayer -= ShakeOff;
+            ShakeOff();
         }
     }
 }

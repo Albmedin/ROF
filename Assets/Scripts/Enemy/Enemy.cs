@@ -24,7 +24,7 @@ public abstract class Enemy : MonoBehaviour
     public void AbstractStart()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
-        animator = GetComponent<Animator>();
+        animator = GetComponentInChildren<Animator>();
     }
     
     public virtual void Damage(int damage){
@@ -32,14 +32,18 @@ public abstract class Enemy : MonoBehaviour
         healthBar.fillAmount = (float)currHealth/maxHealth;
         animator.SetTrigger("Hit");
         if (currHealth <= 0){
-            Destroy(gameObject);
+            Die();
         }
+    }
+    
+    public virtual void Die(){
+        Destroy(gameObject);
     }
     
     public void IndicateAttack(float timer){
         if (timer <= warningTime && !indicatedAttack){
             animator.SetTrigger("Warn");
-            animator.SetFloat("Warn Time", 1/warningTime);
+            animator.SetFloat("Warn Time", 1f/warningTime);
             indicatedAttack = true;
         }
         else if (timer >= warningTime){
@@ -47,8 +51,8 @@ public abstract class Enemy : MonoBehaviour
         }
     }
     
-    public virtual void OnCollisionEnter(Collision other) {
-        if (other.gameObject.tag == "Player") {
+    public virtual void OnTriggerEnter(Collider other) {
+        if (other.tag == "PlayerHitbox") {
             player.Damage(bodyDamage, transform.position);
         }
     }

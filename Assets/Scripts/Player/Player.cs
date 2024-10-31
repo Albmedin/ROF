@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
+using Unity.VisualScripting.Antlr3.Runtime;
 
 public class Player : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] float knockbackForce = 3f;
     [SerializeField] int slowStacks = 0;
     [SerializeField] float slowStackTime = 3f;
+    
     [Header("Weapon")]
     [SerializeField] float shotDelay = 0.4f;
     [SerializeField] float chargeTimeMax = 0.75f;
@@ -23,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] Transform gunTip;
     [SerializeField] GameObject bullet;
     [SerializeField] GameObject bullet2;
+    
     [Header("Ground Movement")]
     [SerializeField] float normalSpeed = 1f;
     [SerializeField] float slowSpeed = 0.5f;
@@ -33,6 +36,7 @@ public class Player : MonoBehaviour
     [SerializeField] float dashMultiplier = 2f;
     [SerializeField] float dashCooldownTime = 0.5f;
     [SerializeField] float jumpHeight = 1f;
+    
     [Header("Flight")]
     [SerializeField] float airSpeed = 4.5f;
     [SerializeField] float liftSpeed = 3.5f;
@@ -53,6 +57,7 @@ public class Player : MonoBehaviour
 
     // Internal Variables
     bool isGrounded = true;
+    bool isDashing = false;
     bool inFlight = false;
     bool inLift = false;
     float horizontalVelocity = 0;
@@ -73,6 +78,7 @@ public class Player : MonoBehaviour
     PlayerInput playerInput;
     InputAction moveAction, mouseAction, shootAction, specialAction, jumpAction, dashAction, interactAction;
     CinemachineImpulseSource impulseSource;
+    Animator animator;
 
     // Start is called before the first frame update
     void Start()
@@ -92,6 +98,9 @@ public class Player : MonoBehaviour
         dashAction = playerInput.actions.FindAction("Dash");
         interactAction = playerInput.actions.FindAction("Interact");
         
+        animator = GetComponentInChildren<Animator>();
+        animator.SetFloat("ChargeTime", chargeTimeMax);
+        
         KillPlayer += playerInput.DeactivateInput;
     }
 
@@ -100,6 +109,9 @@ public class Player : MonoBehaviour
     {
         Movement();
         GunManager();
+        
+        animator.SetBool("Dashing", isDashing);
+        animator.SetBool("Charging", chargeTime > 0);
     }
 
     void Movement(){
@@ -115,6 +127,7 @@ public class Player : MonoBehaviour
 
             // Dash
             if (horizontalVelocity != 0 && dashAction.triggered && dashCooldownTimer<=0){
+                isDashing = true;
                 dashTimer = dashTime;
                 dashCooldownTimer = dashCooldownTime;
                 horizontalVelocity *= dashMultiplier;
@@ -130,6 +143,7 @@ public class Player : MonoBehaviour
             else {
                 horizontalVelocity = moveAction.ReadValue<float>()*adjustedSpeed;
                 dashCooldownTimer -= Time.deltaTime;
+                isDashing = false;
             }
 
             horizontalVelocity *= (slowStacks>0) ? slowSpeed : normalSpeed;
@@ -143,10 +157,15 @@ public class Player : MonoBehaviour
 
             // Flip sprite
             if (horizontalVelocity < 0) {
+                animator.SetBool("Flying", true);
                 playerSprite.flipX = true;
             }
             else if (horizontalVelocity > 0) {
+                animator.SetBool("Flying", true);
                 playerSprite.flipX = false;
+            }
+            else {
+                animator.SetBool("Flying", inFlight);
             }
 
             // Jump

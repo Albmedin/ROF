@@ -1,0 +1,419 @@
+fileFormatVersion: 2
+guid: 5ddd9c83adf987f4992dd1a01740af51
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 100
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 7
+    customPivotPosition: {x: 0.5, y: 0.5}
+    mosaicPadding: 4
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 0
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: tinyspider_injuredEXPLODE_Frame_0
+    originalName: 
+    pivot: {x: 0.5192308, y: -0.1764706}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 188
+      width: 52
+      height: 51
+    spriteID: 19426b2dc5fd77948b7919fecc745dde
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 188}
+  - name: tinyspider_injuredEXPLODE_Frame_1
+    originalName: 
+    pivot: {x: 0.5272727, y: -0.2244898}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 131
+      width: 55
+      height: 49
+    spriteID: 887c5f12a81e0dd48aacec324342837d
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 131}
+  - name: tinyspider_injuredEXPLODE_Frame_2
+    originalName: 
+    pivot: {x: 0.5272727, y: -0.15686275}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 72
+      width: 55
+      height: 51
+    spriteID: 1fb9de52e9210964aa9e749a45d07c98
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 72}
+  - name: tinyspider_injuredEXPLODE_Frame_3
+    originalName: 
+    pivot: {x: 0.5185185, y: -0.1632653}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 4
+      width: 54
+      height: 49
+    spriteID: 5ced8b6a7a23a2848946f74f78e2305c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 4}
+  - name: tinyspider_injuredEXPLODE_Frame_4
+    originalName: 
+    pivot: {x: 0.5185185, y: -0.1632653}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 61
+      width: 54
+      height: 49
+    spriteID: 26726f24524e7af45aebe6b261b333e4
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 61}
+  - name: tinyspider_injuredEXPLODE_Frame_5
+    originalName: 
+    pivot: {x: 0.51428574, y: -0.23076923}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 132
+      y: 48
+      width: 35
+      height: 39
+    spriteID: 4f51de3bad970344bbb33184deebdca5
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 132, y: 48}
+  - name: tinyspider_injuredEXPLODE_Frame_6
+    originalName: 
+    pivot: {x: 0.4827586, y: -0.033333335}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 58
+      height: 60
+    spriteID: 5de6776cc5f4d6248bedd1e724ec7b35
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: tinyspider_injuredEXPLODE_Frame_7
+    originalName: 
+    pivot: {x: 0.5, y: -0.1632653}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 118
+      width: 50
+      height: 49
+    spriteID: a7ba993bea9fc114dac0d94540408369
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 118}
+  - name: tinyspider_injuredEXPLODE_Frame_8
+    originalName: 
+    pivot: {x: 0.5106383, y: -0.18367347}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 70
+      y: 175
+      width: 47
+      height: 49
+    spriteID: 89b90a1da4c39cf4991b268c00254693
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 70, y: 175}
+  - name: tinyspider_injuredEXPLODE_Frame_9
+    originalName: 
+    pivot: {x: 0.54545456, y: -0.3611111}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 132
+      y: 4
+      width: 44
+      height: 36
+    spriteID: e955a55a1b44876458a825e2dfed4800
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 132, y: 4}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 2145656156
+    name: tinyspider_injuredEXPLODE
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: tinyspider_injuredEXPLODE_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 5
+        y: 9
+        width: 52
+        height: 51
+      spriteId: 19426b2dc5fd77948b7919fecc745dde
+    - name: tinyspider_injuredEXPLODE_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 3
+        y: 11
+        width: 55
+        height: 49
+      spriteId: 887c5f12a81e0dd48aacec324342837d
+    - name: tinyspider_injuredEXPLODE_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 3
+        y: 8
+        width: 55
+        height: 51
+      spriteId: 1fb9de52e9210964aa9e749a45d07c98
+    - name: tinyspider_injuredEXPLODE_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 4
+        y: 8
+        width: 54
+        height: 49
+      spriteId: 5ced8b6a7a23a2848946f74f78e2305c
+    - name: tinyspider_injuredEXPLODE_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 4
+        y: 8
+        width: 54
+        height: 49
+      spriteId: 26726f24524e7af45aebe6b261b333e4
+    - name: tinyspider_injuredEXPLODE_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 14
+        y: 9
+        width: 35
+        height: 39
+      spriteId: 4f51de3bad970344bbb33184deebdca5
+    - name: tinyspider_injuredEXPLODE_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 4
+        y: 2
+        width: 58
+        height: 60
+      spriteId: 5de6776cc5f4d6248bedd1e724ec7b35
+    - name: tinyspider_injuredEXPLODE_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 7
+        y: 8
+        width: 50
+        height: 49
+      spriteId: a7ba993bea9fc114dac0d94540408369
+    - name: tinyspider_injuredEXPLODE_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 8
+        y: 9
+        width: 47
+        height: 49
+      spriteId: 89b90a1da4c39cf4991b268c00254693
+    - name: tinyspider_injuredEXPLODE_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 8
+        y: 13
+        width: 44
+        height: 36
+      spriteId: e955a55a1b44876458a825e2dfed4800
+    linkedCells: []
+    parentIndex: -1
+  platformSettings: []
+  generatePhysicsShape: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 64, y: 64}

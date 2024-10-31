@@ -687,6 +687,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5086814509914070041}
+  - component: {fileID: 7318791411287507888}
+  - component: {fileID: 6450066139439067523}
+  - component: {fileID: 4352285167638649473}
   m_Layer: 5
   m_Name: Death Screen
   m_TagString: Untagged
@@ -714,11 +717,63 @@ RectTransform:
   - {fileID: 4292754870000803998}
   m_Father: {fileID: 1937635171955778492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 719.8773}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7318791411287507888
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470927601867232702}
+  m_CullTransparentMesh: 1
+--- !u!114 &6450066139439067523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470927601867232702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.168, g: 0.126, b: 0.13827193, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4352285167638649473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1470927601867232702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 4
+  m_AspectRatio: 1
 --- !u!1 &1488375419132614945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1412,6 +1467,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9049163351296411436}
+  - component: {fileID: 659055906337007759}
+  - component: {fileID: 6906861790017198592}
+  - component: {fileID: 1473410811729320467}
   m_Layer: 5
   m_Name: Pause Menu
   m_TagString: Untagged
@@ -1440,11 +1498,63 @@ RectTransform:
   - {fileID: 7930742407162725082}
   m_Father: {fileID: 1937635171955778492}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 719.8773}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &659055906337007759
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558540309890484876}
+  m_CullTransparentMesh: 1
+--- !u!114 &6906861790017198592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558540309890484876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.7490196}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1473410811729320467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2558540309890484876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86710e43de46f6f4bac7c8e50813a599, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AspectMode: 4
+  m_AspectRatio: 1
 --- !u!1 &2603108202090583856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1673,7 +1783,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8737416576430447344
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1766,7 +1876,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -207.17834}
+  m_AnchoredPosition: {x: 0, y: -241}
   m_SizeDelta: {x: 300, y: 115}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3939894084082355390
@@ -2037,8 +2147,8 @@ MonoBehaviour:
     body: "The root of all spiders. The mothers have a lot of the same tactics as
       the adult spiders. Carrying more advanced Arachnid-Engineering prototypes,
       the MOAS\u2019 shoot faster web balls, and heavier, but slower Arachnid Abdomen
-      Armor. The mothers will also make use of their children spitting out (4 or
-      5) to weigh you down to make it easier for the mother to catch you. \r"
+      Armor. The mothers will also make use of their children spitting out 5 to weigh
+      you down to make it easier for the mother to catch you. \r"
     sprite: {fileID: 900397948263619752, guid: fcbbcb5122db7434db0d10a27baf39fe, type: 3}
 --- !u!1 &3583485954391665644
 GameObject:
@@ -2057,7 +2167,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2084367549021381992
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2965,10 +3075,12 @@ MonoBehaviour:
 
     RMB - Special Ability
 
-    Shift
+    SHIFT
     - Dash
 
-    Space/W - Fly'
+    SPACE/W - Fly
+
+    TAB - Pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 693c2ba78e04c0147908160b45d239c4, type: 2}
   m_sharedMaterial: {fileID: -7715027213333554822, guid: 693c2ba78e04c0147908160b45d239c4, type: 2}
@@ -3472,7 +3584,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -360}
+  m_AnchoredPosition: {x: 0, y: -393.82166}
   m_SizeDelta: {x: 300, y: 155}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7542855402326992664

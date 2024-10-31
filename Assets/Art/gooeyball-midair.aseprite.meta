@@ -123,8 +123,8 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: gooeyball-midair_Frame_0
     originalName: 
-    pivot: {x: 0.42857143, y: -0.7916667}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
@@ -143,7 +143,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 37}
   - name: gooeyball-midair_Frame_1
     originalName: 
-    pivot: {x: 0.4047619, y: -0.8333334}
+    pivot: {x: 0.47619048, y: 0.45833334}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -163,8 +163,8 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 69}
   - name: gooeyball-midair_Frame_2
     originalName: 
-    pivot: {x: 0.42857143, y: -0.79999995}
-    alignment: 9
+    pivot: {x: 0.5, y: 0.5}
+    alignment: 0
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2

@@ -31,7 +31,7 @@ public class MaleSpider : Enemy
     [SerializeField] float detectionDistance = 10f;
     [SerializeField] float alertTime = 5f;
     [SerializeField] LayerMask rayCastLayers;
-    [SerializeField] SpriteRenderer sprite;
+    [SerializeField] Transform spriteParent;
     
     // Internal Variables
     EnemyState activeState = EnemyState.Patrol;
@@ -40,6 +40,8 @@ public class MaleSpider : Enemy
     float patrolTimer = 0f;
     float alertTimer = 0f;
     float chargeTimer = 0f;
+    float chargeAbsoluteTime = 5f;
+    float chargeAbsoluteTimer = 0f;
     float chargeSide = 0f;
     float actionTimer = 0f;
     
@@ -58,6 +60,8 @@ public class MaleSpider : Enemy
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
         
+        animator.SetFloat("Attack Time", 1f/delayBetweenShots);
+        
         PatrolInit();
     }
 
@@ -73,7 +77,11 @@ public class MaleSpider : Enemy
         }
         
         if (Mathf.Abs(agent.velocity.x) > 0){
-            sprite.transform.right = new Vector3(-agent.velocity.x, 0, 0);
+            spriteParent.transform.right = new Vector3(-agent.velocity.x, 0, 0);
+            animator.SetBool("Walking", true);
+        }
+        else {
+            animator.SetBool("Walking", false);
         }
         
         switch (activeState){
@@ -209,12 +217,15 @@ public class MaleSpider : Enemy
     void ShootInit(){
         shootTimer = delayBeforeShooting;
         shotsLeft = shotCount;
+        agent.SetDestination(transform.position);
+        IndicateAttack(999999f);
         StartCoroutine(DelayBeforeShooting());
     }
     
     void ShootUpdate(){
         if (shotsLeft<=0){
             shootTimer = shootCooldown;
+            animator.SetBool("Attacking", false);
             SwitchActiveState(EnemyState.Alert);
             return;
         }
@@ -224,19 +235,21 @@ public class MaleSpider : Enemy
             shootTimer = delayBetweenShots;
             shotsLeft--;
         }
+        if (shootTimer <= delayBetweenShots){
+            animator.SetBool("Attacking", true);
+        }
         
         IndicateAttack(shootTimer);
     }
     
     IEnumerator DelayBeforeShooting(){
+        spriteParent.transform.right = new Vector3(player.transform.position.x-transform.position.x, 0, 0);
         yield return new WaitForSeconds(delayBeforeShooting);
-        // sprite.flipX = player.transform.position.x-transform.position.x < 0;
-        sprite.transform.right = new Vector3(player.transform.position.x-transform.position.x, 0, 0);
     }
     
     void Shoot(){
         // Shoot three shots
-        sprite.transform.right = new Vector3(player.transform.position.x-transform.position.x, 0, 0);
+        spriteParent.transform.right = new Vector3(transform.position.x-player.transform.position.x, 0, 0);
         Vector3 dir = player.transform.position - shotOrigin.position; 
         float dist = new Vector3(dir.x, 0, 0).magnitude;
         float g = Physics.gravity.magnitude;
@@ -270,19 +283,23 @@ public class MaleSpider : Enemy
     
     void ChargeInit(){
         agent.speed = chargingSpeed;
+        chargeAbsoluteTimer = chargeAbsoluteTime;
         chargeSide = Mathf.Sign(player.transform.position.x-transform.position.x);
         IndicateAttack(999999f);
+        animator.SetFloat("Charging", 2f);
         StartCoroutine(ChargeStart());
     }
     
     void ChargeUpdate(){
-        if (Mathf.Sign(agent.destination.x-transform.position.x) != chargeSide && agent.velocity.magnitude < 0.1f){
+        if (Mathf.Sign(agent.destination.x-transform.position.x) != chargeSide && agent.velocity.magnitude < 0.1f || chargeAbsoluteTimer <= 0){
             agent.autoBraking = true;
             agent.SetDestination(transform.position);
             chargeTimer = chargeCooldown;
+            animator.SetFloat("Charging", 1f);
             SwitchActiveState(EnemyState.Alert);
             return;
         }
+        chargeAbsoluteTimer -= Time.deltaTime;
     }
     
     IEnumerator ChargeStart(){
@@ -292,6 +309,7 @@ public class MaleSpider : Enemy
             IndicateAttack(chargeTimer);
             yield return null;
         }
+        chargeTimer = chargeCooldown;
         agent.autoBraking = false;
         agent.SetDestination(player.transform.position);
     }
