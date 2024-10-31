@@ -7,8 +7,8 @@ public abstract class Bullet : MonoBehaviour
     [SerializeField] float existTime = 3f;
     [SerializeField] float speed = 5f;
     public float Speed {get{return speed;}}
-    [SerializeField] uint damage = 1;
-    public uint Damage {get{return damage;}}
+    [SerializeField] int damage = 1;
+    public int Damage {get{return damage;}}
     
     Rigidbody rb;
     
