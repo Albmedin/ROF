@@ -271,7 +271,6 @@ public class Player : MonoBehaviour
     }
 
     void OnPause(){
-        Debug.Log("Paused Game");
         if(PauseGame != null){
             PauseGame();
         }
