@@ -472,27 +472,30 @@ MonoBehaviour:
   currHealth: 10
   knockbackTime: 0.25
   knockbackForce: 3
+  slowStacks: 0
+  slowStackTime: 3
   shotDelay: 0.4
   chargeTimeMax: 0.75
   aimObject: {fileID: 680032540490959830}
   gunTip: {fileID: 4163393931250344722}
   bullet: {fileID: 4237827423757216220, guid: c1e3985c1d534274daba75f6ea0ab41c, type: 3}
   bullet2: {fileID: 4237827423757216220, guid: 6b2ea86292cc9634a800d16c699321f1, type: 3}
-  speedMultiplier: 1
+  normalSpeed: 1
+  slowSpeed: 0.5
   gravity: -30
   terminalVelocity: -20
-  groundSpeed: 3.5
+  groundSpeed: 3
   dashTime: 0.25
   dashMultiplier: 2
   dashCooldownTime: 0.5
-  jumpHeight: 0.5
+  jumpHeight: 1
   airSpeed: 4.5
   liftSpeed: 3.5
   flightMaxStamina: 5
   flightStamina: 5
   staminaDepletion: 1
   staminaRegen: 3.75
-  flightInputDelay: 0.14
+  flightInputDelay: 0.2
 --- !u!114 &3015913369936431833
 MonoBehaviour:
   m_ObjectHideFlags: 0
